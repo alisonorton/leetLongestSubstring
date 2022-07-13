@@ -6,12 +6,15 @@ class Solution {
         boolean stopLoop = false;
         int length = 0;
         
-        sub.append(string.charAt(0));
+        if(string.length() != 0){
+            sub.append(string.charAt(0));
+        }
+        else return 0;
+        
         
         for (int i = 1; i < string.length(); i++){
             if (sub.charAt(sub.length()-1) == string.charAt(i)){
                 sub.delete(0, sub.length());
-                sub.append(string.charAt(i));
                 System.out.println(sub);
             }
             else {
@@ -26,9 +29,10 @@ class Solution {
                break;
            }
             else{
-                sub.append(i);
+                sub.append(string.charAt(i));
             }
         }
+        System.out.println(sub);
         
         length = sub.length();
         return length;
