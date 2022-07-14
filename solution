@@ -1,40 +1,31 @@
+
 class Solution {
     public int lengthOfLongestSubstring(String s) {
         
-        String string = s;
-        StringBuilder sub = new StringBuilder();
-        boolean stopLoop = false;
-        int length = 0;
+        ArrayList<String> subs = new ArrayList<>();
+        Set<Character> set = new HashSet<>();
         
-        if(string.length() != 0){
-            sub.append(string.charAt(0));
-        }
-        else return 0;
+        int i = 0;
+        int j = 0;
+        int distance = 0;
         
-        
-        for (int i = 1; i < string.length(); i++){
-            if (sub.charAt(sub.length()-1) == string.charAt(i)){
-                sub.delete(0, sub.length());
-                System.out.println(sub);
+        while(i < s.length() && j < s.length()){
+            if(!set.contains(s.charAt(j))){
+                set.add(s.charAt(j));
+                distance = Math.max(distance, j - i +1);
+                subs.add(s.substring(i, j+1));
+                j++;
+                System.out.println(set);
             }
-            else {
-                for (int j = 0; j < sub.length(); j++){
-                    if (sub.charAt(j) == string.charAt(i)){
-                        stopLoop = true;
-                    }
-                }
+            else{
+                set.remove(s.charAt(i));
+                i++;
+                System.out.println(set);
             }
             
-           if (stopLoop){
-               break;
-           }
-            else{
-                sub.append(string.charAt(i));
-            }
         }
-        System.out.println(sub);
         
-        length = sub.length();
-        return length;
+        
+        return distance;
     }
 }
